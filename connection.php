@@ -4,8 +4,8 @@ $user = "root";
 $pass = "mysql";
 
 try {
-    $db = new PDO("
-        mysql:host=localhost;
+    $db = new PDO(
+        "mysql:host=localhost;
         port=3306;
         dbname=crud_php", 
         $user, $pass
