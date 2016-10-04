@@ -4,6 +4,8 @@ require 'inc/functions.php';
 $pageTitle = "Task | Time Tracker";
 $page = "tasks";
 
+$project_id = $title = $date = $time = '';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $project_id = trim(filter_input(INPUT_POST, 'project_id', FILTER_SANITIZE_NUMBER_INT));
     $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
@@ -13,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($project_id) || empty($title) || empty($date) || empty($time)) {
         $error_message = 'Please fill in the required fields: Project, Title, Date, Time';
     } else {
-        if (add_project($project_id, $title, $date, $time)) {
+        if (add_task($project_id, $title, $date, $time)) {
             header('Location: task_list.php');
             exit;
         } else {
@@ -45,8 +47,11 @@ include 'inc/header.php';
                                 <option value="">Select One</option>
                                 <?php
                                     foreach (get_project_list() as $item) {
-                                        echo "<option value='" . $item['project_id'] . "'>" 
-                                        . $item['title'] . "</option>";
+                                        echo "<option value='" . $item['project_id'] . "'";
+                                        if ($project_id == $item['project_id']) {
+                                            echo ' selected';
+                                        }
+                                        echo ">" . $item['title'] . "</option>";
                                     }
                                 ?>
 
@@ -55,15 +60,15 @@ include 'inc/header.php';
                     </tr>
                     <tr>
                         <th><label for="title">Title<span class="required">*</span></label></th>
-                        <td><input type="text" id="title" name="title" value="" /></td>
+                        <td><input type="text" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>" /></td>
                     </tr>
                     <tr>
                         <th><label for="date">Date<span class="required">*</span></label></th>
-                        <td><input type="text" id="date" name="date" value="" placeholder="mm/dd/yyyy" /></td>
+                        <td><input type="text" id="date" name="date" value="<?php echo htmlspecialchars($date); ?>" placeholder="mm/dd/yyyy" /></td>
                     </tr>
                     <tr>
                         <th><label for="time">Time<span class="required">*</span></label></th>
-                        <td><input type="text" id="time" name="time" value="" /> minutes</td>
+                        <td><input type="text" id="time" name="time" value="<?php echo htmlspecialchars($time); ?>" /> minutes</td>
                     </tr>
                 </table>
                 <input class="button button--primary button--topic-php" type="submit" value="Submit" />

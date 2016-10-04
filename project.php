@@ -33,7 +33,7 @@ include 'inc/header.php';
                 echo "<p class='message'>$error_message</p>";
             }
             ?>
-            <form class="form-container form-add" method="POST" action="project.php">
+            <form class="form-container form-add" method="post" action="project.php">
                 <table>
                     <tr>
                         <th><label for="title">Title<span class="required">*</span></label></th>

@@ -44,7 +44,7 @@ function add_project($title, $category) {
 function add_task($project_id, $title, $date, $time) {
     include 'connection.php';
 
-    $sql = "INSERT INTO tasks(project_id, title, date, time) VALUES(?, ?, ?, ?)";
+    $sql = 'INSERT INTO tasks(project_id, title, date, time) VALUES(?, ?, ?, ?)';
 
     try {
         $results = $db->prepare($sql);
