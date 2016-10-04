@@ -7,16 +7,19 @@ $page = "projects";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
-    $CATEGORY = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
+    $category = trim(filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING));
 
     if (empty($title) || empty($category)) {
         $error_message = 'Please fill in the required fields: Title, Category';
     } else {
-        echo "title = $title<br />";
-        echo "category = $category<br />";
+        if (add_project($title, $category)) {
+            header('Location: project_list.php');
+            exit;
+        } else {
+            $error_message = 'Could not add project';
+        }
     }
 }
-
 
 include 'inc/header.php';
 ?>
@@ -29,7 +32,8 @@ include 'inc/header.php';
             if (isset($error_message)) {
                 echo "<p class='message'>$error_message</p>";
             }
-            <form class="form-container form-add" method="post" action="project.php">
+            ?>
+            <form class="form-container form-add" method="POST" action="project.php">
                 <table>
                     <tr>
                         <th><label for="title">Title<span class="required">*</span></label></th>
