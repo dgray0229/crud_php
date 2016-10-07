@@ -1,14 +1,18 @@
 <?php
 
-$user = "root";
-$pass = "mysql";
-
 try {
+    require_once('inc/cred.php');
+
+    $HOST = getenv("HOST");
+    $PORT = getenv("PORT");
+    $USER = getenv("USER");
+    $PASS = getenv("PASSWORD");
+
     $db = new PDO(
-        "mysql:host=localhost;
-        port=3306;
+        "mysql:host=$HOST;
+        port=$PORT;
         dbname=crud_php", 
-        $user, $pass
+        $USER, $PASS
     );
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
