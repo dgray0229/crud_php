@@ -22,10 +22,10 @@ include 'inc/header.php';
 
             <div class="form-container">
               <ul class="items">
-                    <?php
-                        foreach (get_task_list() as $item) {
-                            echo "<li>" . $item['title'] . "</li>";
-                        }
+                  <?php
+                    foreach (get_task_list() as $item) {
+                        echo "<li>" . $item['title'] . "</li>";
+                    }
                     ?>
               </ul>
             </div>

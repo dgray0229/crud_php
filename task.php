@@ -3,7 +3,6 @@ require 'inc/functions.php';
 
 $pageTitle = "Task | Time Tracker";
 $page = "tasks";
-
 $project_id = $title = $date = $time = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -11,17 +10,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
     $date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING));
     $time = trim(filter_input(INPUT_POST, 'time', FILTER_SANITIZE_NUMBER_INT));
-
-    $dateMatch = explode('/', $date);
-
+    
+    $dateMatch = explode('/',$date);
+    
     if (empty($project_id) || empty($title) || empty($date) || empty($time)) {
         $error_message = 'Please fill in the required fields: Project, Title, Date, Time';
     } elseif (count($dateMatch) != 3
-        || strlen($dateMatch[0]) != 2
-        || strlen($dateMatch[1]) != 2
-        || strlen($dateMatch[2]) != 4
-        || !checkdate($dateMatch[0], $dateMatch[1], $dateMatch[2])
-    ) {
+             || strlen($dateMatch[0]) != 2
+             || strlen($dateMatch[1]) != 2
+             || strlen($dateMatch[2]) != 4
+             || !checkdate($dateMatch[0],$dateMatch[1], $dateMatch[2])) {
         $error_message = 'Invalid Date';
     } else {
         if (add_task($project_id, $title, $date, $time)) {
@@ -49,21 +47,20 @@ include 'inc/header.php';
                 <table>
                     <tr>
                         <th>
-                            <label for="project_id">Project</label>
+                            <label for="project_id">Project<span class="required">*</span></label>
                         </th>
                         <td>
                             <select name="project_id" id="project_id">
                                 <option value="">Select One</option>
                                 <?php
-                                    foreach (get_project_list() as $item) {
-                                        echo "<option value='" . $item['project_id'] . "'";
-                                        if ($project_id == $item['project_id']) {
-                                            echo ' selected';
-                                        }
-                                        echo ">" . $item['title'] . "</option>";
+                                foreach (get_project_list() as $item) {
+                                    echo "<option value='" . $item['project_id'] . "'";
+                                    if ($project_id == $item['project_id']) {
+                                        echo ' selected';
                                     }
+                                    echo ">" . $item['title'] . "</option>";
+                                }
                                 ?>
-
                             </select>
                         </td>
                     </tr>
