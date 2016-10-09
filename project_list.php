@@ -1,9 +1,8 @@
 <?php
-require 'inc/functions.php';
 
+require 'inc/functions.php';
 $page = "projects";
 $pageTitle = "Project List | Time Tracker";
-
 include 'inc/header.php';
 ?>
 <div class="section catalog random">
@@ -22,11 +21,11 @@ include 'inc/header.php';
 
             <div class="form-container">
                 <ul class="items">
-                    <?php
-                    foreach (get_project_list() as $item) {
-                        echo "<li>" . $item['title'] . "</li>";
-                    }
-                    ?>
+                    <?php 
+foreach (get_project_list() as $item) {
+    echo "<li><a href='project.php?id=" . $item['project_id'] . "'>" . $item['title'] . "</a></li>";
+}
+?>
                 </ul>
             </div>
         </div>
@@ -34,4 +33,5 @@ include 'inc/header.php';
 
 </div>
 
-<?php include("inc/footer.php"); ?>
+<?php 
+include "inc/footer.php";
