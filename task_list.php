@@ -15,7 +15,7 @@ if (isset($_POST['delete'])) {
 }
 
 if (isset($_GET['msg'])) {
-    $error_msg = trim(filter_input(INPUT_GET, 'msg', FILTER_SANITIZE_STRING));
+    $error_message = trim(filter_input(INPUT_GET, 'msg', FILTER_SANITIZE_STRING));
 }
 
 include 'inc/header.php';
@@ -46,7 +46,7 @@ include 'inc/header.php';
                     foreach (get_task_list() as $item) {
                         echo "<li><a href='task.php?id=" . $item['task_id'] . "'>" . $item['title'] . "</a>";
                         echo "<form method='post' action='task_list.php' onsubmit=\"return confirm('Are you sure you want to delete this task?'); \">\n";
-                        echo "<input type='hidden' value='" . $item['task_id']. "' name='delete' />\n";
+                        echo "<input type='hidden' value='" . $item['task_id'] . "' name='delete' />\n";
                         echo "<input type='submit' class='button--delete' value='Delete' />\n";
                         echo "</form>";
                         echo "</li>";
