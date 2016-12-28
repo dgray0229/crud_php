@@ -1,8 +1,6 @@
 <?php
 
 try {
-    require_once('inc/cred.php');
-
     $URL = getenv('JAWSDB_URL');
     $dbparts = parse_url($URL);
 
