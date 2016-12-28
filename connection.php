@@ -7,14 +7,12 @@ try {
     $dbparts = parse_url($URL);
 
     $HOST = $dbparts['host'];
-    $PORT = $dbparts['port'];
     $USER = $dbparts['user'];
     $PASS = $dbparts['pass'];
     $DATABASE = ltrim($dbparts['path'], '/');
 
     $db = new PDO(
         "mysql:host=$HOST;
-        port=$PORT;
         dbname=$DATABASE",
         $USER, $PASS
     );
