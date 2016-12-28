@@ -7,15 +7,18 @@ try {
     $dbparts = parse_url($URL);
 
     $HOST = $dbparts['host'];
+    $PORT = $dbparts['port'];
     $USER = $dbparts['user'];
     $PASS = $dbparts['pass'];
     $DATABASE = ltrim($dbparts['path'], '/');
 
     $db = new PDO(
         "mysql:host=$HOST;
+        port=$PORT;
         dbname=$DATABASE",
         $USER, $PASS
     );
+    var_dump($URL);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
     echo $e->getMessage();
