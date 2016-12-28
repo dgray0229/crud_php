@@ -14,7 +14,6 @@ try {
         dbname=$DATABASE",
         $USER, $PASS
     );
-    var_dump($URL);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
     echo $e->getMessage();
